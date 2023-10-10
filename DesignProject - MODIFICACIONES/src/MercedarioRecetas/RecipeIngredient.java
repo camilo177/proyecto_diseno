@@ -39,7 +39,7 @@ public class RecipeIngredient {
     }
 
     public String calculateIngredients() {
-        return ingredient.getNameIngredient(); //revisar este metodo. 
+        return ingredient.getNameIngredient(); //Dejar este método
     }
 
     @Override

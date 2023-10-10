@@ -7,10 +7,12 @@ import java.util.List;
 public class Facade {
     private Recipe recipe;
     private List<Recipe> recipeList;
+    private List<RecipeIngredient> allIngredients; // List to store all ingredients
 
     public Facade() {
         this.recipe = new Recipe();
         this.recipeList = new ArrayList<>();
+        this.allIngredients = new ArrayList<>();
     }
 
     // Methods for managing RecipeIngredients
@@ -21,6 +23,7 @@ public class Facade {
         }
 
         recipe.getIngredientList().add(recipeIngredient);
+        allIngredients.add(recipeIngredient); // Add the ingredient to the allIngredients list
     }
 
     public void editRecipeIngredient(String oldIngredientName, RecipeIngredient newRecipeIngredient) {
@@ -30,6 +33,8 @@ public class Facade {
             if (recipeIngredient.calculateIngredients().equals(oldIngredientName)) {
                 iterator.remove();
                 recipe.getIngredientList().add(newRecipeIngredient);
+                allIngredients.remove(recipeIngredient); // Remove the old ingredient from allIngredients
+                allIngredients.add(newRecipeIngredient); // Add the new ingredient to allIngredients
                 break;
             }
         }
@@ -41,6 +46,7 @@ public class Facade {
             RecipeIngredient recipeIngredient = iterator.next();
             if (recipeIngredient.calculateIngredients().equals(ingredientName)) {
                 iterator.remove();
+                allIngredients.remove(recipeIngredient); // Remove the ingredient from allIngredients
                 return true; // El ingrediente se eliminó con éxito
             }
         }
@@ -98,4 +104,10 @@ public class Facade {
     public List<Recipe> viewAllRecipes() {
         return recipeList;
     }
+
+    // Method to view all ingredients
+    public List<RecipeIngredient> viewAllIngredients() {
+        return allIngredients;
+    }
+
 }
