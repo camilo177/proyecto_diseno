@@ -62,42 +62,6 @@ public class Recipe {
         this.preparationDescription = preparationDescription;
     }
 
-    public void addRecipeIngredient(RecipeIngredient recipeIngredient) {
-        if (ingredientList == null) {
-            ingredientList = new ArrayList<>();
-        }
-
-        ingredientList.add(recipeIngredient);
-    }
-
-    public void editRecipeIngredient(String oldIngredientName, RecipeIngredient newRecipeIngredient) {
-    for (RecipeIngredient recipeIngredient : ingredientList) {
-        if (recipeIngredient.ingredient.getNameIngredient().equals(oldIngredientName)) {
-            // Reemplaza el ingrediente antiguo por el nuevo
-            ingredientList.remove(recipeIngredient);
-            ingredientList.add(newRecipeIngredient);
-            break;
-            }
-        }
-    }
-
-    public boolean deleteRecipeIngredient(String ingredientName) {
-    for (RecipeIngredient recipeIngredient : ingredientList) {
-        if (recipeIngredient.ingredient.getNameIngredient().equals(ingredientName)) {
-            ingredientList.remove(recipeIngredient);
-            return true; // El ingrediente se eliminó con éxitoo
-            }
-        }
-        return false; // No se encontró el ingrediente
-    }
-
-    public void prepareRecipe() {
-        //Que hacemos con este metodo para que serves?
-    }
-
-    public List<RecipeIngredient> viewRecipeIngredient() {
-        return ingredientList;
-    }
 
     @Override
     public String toString() {

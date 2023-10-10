@@ -3,7 +3,8 @@ package MercedarioRecetas;
 public class RecipeIngredient {
 
     private double quantity;
-    protected Ingredientes ingredient;
+    Ingredientes ingredient;
+
 
     public RecipeIngredient() {
     }
@@ -19,6 +20,14 @@ public class RecipeIngredient {
 
     public void setQuantity(double quantity) {
         this.quantity = quantity;
+    }
+
+    public Ingredientes getIngredient() {
+        return ingredient;
+    }
+
+    public void setIngredient(Ingredientes ingredient) {
+        this.ingredient = ingredient;
     }
 
     public double calculateCost() {

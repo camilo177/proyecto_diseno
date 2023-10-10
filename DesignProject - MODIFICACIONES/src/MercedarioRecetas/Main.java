@@ -2,55 +2,114 @@ package MercedarioRecetas;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
-    
+
     public static void main(String[] args) {
-        // Crear ingredientes
-        Ingredientes ingrediente1 = new Ingredientes();
-        ingrediente1.setNameIngredient("Harina");
-        ingrediente1.setUnit(500);
-        ingrediente1.setValuePerUnit(2.5);
-        ingrediente1.setPurchasePlace("Supermercado");
-        ingrediente1.setCaloriesPerUnit(350);
+        Scanner scanner = new Scanner(System.in);
+        Facade facade = new Facade();
 
-        Ingredientes ingrediente2 = new Ingredientes();
-        ingrediente2.setNameIngredient("Azúcar");
-        ingrediente2.setUnit(250);
-        ingrediente2.setValuePerUnit(1.0);
-        ingrediente2.setPurchasePlace("Supermercado");
-        ingrediente2.setCaloriesPerUnit(400);
+        while (true) {
+            System.out.println("Seleccione una opción:");
+            System.out.println("1. Crear una nueva receta");
+            System.out.println("2. Ver todas las recetas");
+            System.out.println("3. Salir");
 
-        // Crear ingredientes para recetas
-        RecipeIngredient recipeIngredient1 = new RecipeIngredient(300, ingrediente1);
-        RecipeIngredient recipeIngredient2 = new RecipeIngredient(150, ingrediente2);
+            int choice = scanner.nextInt();
 
-        // Crear lista de ingredientes para una receta
-        List<RecipeIngredient> ingredientList = new ArrayList<>();
-        ingredientList.add(recipeIngredient1);
-        ingredientList.add(recipeIngredient2);
-
-        // Crear una receta
-        Recipe receta = new Recipe();
-        receta.setNameRecipe("Torta de Chocolate");
-        receta.setPreparationTime(2);
-        receta.setServes(8);
-        receta.setIngredientList(ingredientList);
-        receta.setPreparationDescription("Instrucciones de preparación...");
-
-        // Agregar receta a la lista de recetas
-        List<Recipe> listaRecetas = new ArrayList<>();
-        listaRecetas.add(receta);
-
-        // Imprimir la información de la receta
-        System.out.println("Nombre de la receta: " + receta.getNameRecipe());
-        System.out.println("Tiempo de preparación (horas): " + receta.getPreparationTime());
-        System.out.println("Porciones: " + receta.getServes());
-        System.out.println("Ingredientes:");
-        for (RecipeIngredient recipeIngredient : receta.getIngredientList()) {
-            System.out.println("- " + recipeIngredient.calculateIngredients() + ": " + recipeIngredient.getQuantity());
+            switch (choice) {
+                case 1:
+                    createRecipe(scanner, facade);
+                    break;
+                case 2:
+                    viewAllRecipes(facade);
+                    break;
+                case 3:
+                    System.out.println("¡Hasta luego!");
+                    System.exit(0);
+                default:
+                    System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
+                    break;
+            }
         }
-        System.out.println("Descripción de preparación: " + receta.getPreparationDescription());
     }
-    
+
+    private static void createRecipe(Scanner scanner, Facade facade) {
+        Recipe newRecipe = new Recipe();
+
+        System.out.print("Ingrese el nombre de la receta: ");
+        String recipeName = scanner.next();
+        newRecipe.setNameRecipe(recipeName);
+
+        System.out.print("Ingrese el tiempo de preparación (horas): ");
+        int preparationTime = scanner.nextInt();
+        newRecipe.setPreparationTime(preparationTime);
+
+        System.out.print("Ingrese la cantidad de porciones: ");
+        int serves = scanner.nextInt();
+        newRecipe.setServes(serves);
+
+        List<RecipeIngredient> ingredientList = new ArrayList<>();
+
+        while (true) {
+            RecipeIngredient recipeIngredient = createRecipeIngredient(scanner);
+            ingredientList.add(recipeIngredient);
+
+            System.out.print("¿Desea agregar otro ingrediente? (S/N): ");
+            String continueAdding = scanner.next();
+            if (!continueAdding.equalsIgnoreCase("S")) {
+                break;
+            }
+        }
+
+        newRecipe.setIngredientList(ingredientList);
+
+        System.out.print("Ingrese la descripción de preparación: ");
+        String preparationDescription = scanner.next();
+        newRecipe.setPreparationDescription(preparationDescription);
+
+        facade.addRecipe(newRecipe);
+        System.out.println("Receta creada con éxito.");
+    }
+
+    private static RecipeIngredient createRecipeIngredient(Scanner scanner) {
+        RecipeIngredient recipeIngredient = new RecipeIngredient();
+
+        System.out.print("Ingrese el nombre del ingrediente: ");
+        String ingredientName = scanner.next();
+
+        Ingredientes ingredient = new Ingredientes();
+        ingredient.setNameIngredient(ingredientName);
+
+        recipeIngredient.setIngredient(ingredient);
+
+        System.out.print("Ingrese la cantidad: ");
+        double quantity = scanner.nextDouble();
+        recipeIngredient.setQuantity(quantity);
+
+        return recipeIngredient;
+    }
+
+    private static void viewAllRecipes(Facade facade) {
+        List<Recipe> recipes = facade.viewAllRecipes();
+
+        if (recipes.isEmpty()) {
+            System.out.println("No hay recetas disponibles.");
+        } else {
+            System.out.println("Recetas disponibles:");
+            for (Recipe recipe : recipes) {
+                System.out.println("Nombre de la receta: " + recipe.getNameRecipe());
+                System.out.println("Tiempo de preparación (horas): " + recipe.getPreparationTime());
+                System.out.println("Porciones: " + recipe.getServes());
+                System.out.println("Ingredientes:");
+                for (RecipeIngredient recipeIngredient : recipe.getIngredientList()) {
+                    System.out.println("- " + recipeIngredient.getIngredient().getNameIngredient() + ": " + recipeIngredient.getQuantity());
+                }
+                System.out.println("Descripción de preparación: " + recipe.getPreparationDescription());
+                System.out.println();
+            }
+        }
+    }
 }
+
