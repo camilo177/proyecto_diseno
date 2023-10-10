@@ -1,6 +1,6 @@
 package MercedarioRecetas;
 
-public class RecipeIngredient {
+public class RecipeIngredient  {
 
     private double quantity;
     Ingredientes ingredient;

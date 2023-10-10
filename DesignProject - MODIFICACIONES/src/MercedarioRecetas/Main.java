@@ -73,11 +73,14 @@ public class Main {
 
         System.out.print("Ingrese el tiempo de preparación (horas): ");
         int preparationTime = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
         newRecipe.setPreparationTime(preparationTime);
 
         System.out.print("Ingrese la cantidad de porciones: ");
         int serves = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
         newRecipe.setServes(serves);
+
 
         List<RecipeIngredient> ingredientList = new ArrayList<>();
 
@@ -112,14 +115,27 @@ public class Main {
         Ingredientes ingredient = new Ingredientes();
         ingredient.setNameIngredient(ingredientName);
 
-        recipeIngredient.setIngredient(ingredient);
+        System.out.print("Ingrese las unidades del ingrediente: ");
+        int ingredientUnits = Integer.parseInt(scanner.nextLine());
+        ingredient.setUnit(ingredientUnits);
+
+        System.out.print("Ingrese el lugar de compra: ");
+        String purchasePlace = scanner.nextLine();
+        ingredient.setPurchasePlace(purchasePlace);
+
+        System.out.print("Ingrese el valor por unidad: ");
+        double ingredientsValue = Double.parseDouble(scanner.nextLine());
+        ingredient.setValuePerUnit(ingredientsValue);
 
         System.out.print("Ingrese la cantidad: ");
-        double quantity = scanner.nextDouble();
-        scanner.nextLine(); // Consume the newline character
+        double quantity = Double.parseDouble(scanner.nextLine());
         recipeIngredient.setQuantity(quantity);
 
+        System.out.print("Ingrese las calorías por unidad: ");
+        double calories = Double.parseDouble(scanner.nextLine());
+        ingredient.setCaloriesPerUnit(calories);
 
+        recipeIngredient.setIngredient(ingredient);
 
         return recipeIngredient;
     }
