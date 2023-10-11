@@ -87,9 +87,9 @@ public class Facade {
                 // Implement logic to prepare the recipe here
                 System.out.println("Preparing " + recipeName + "...");
                 // Example: Print preparation steps
-                System.out.println("Step 1: ...");
-                System.out.println("Step 2: ...");
-                System.out.println("Recipe prepared!");
+                System.out.println("Paso 1: Inicio de preparación");
+                System.out.println("Paso 2: Receta en preparación");
+                System.out.println("Receta preparada!");
                 return;
             }
         }

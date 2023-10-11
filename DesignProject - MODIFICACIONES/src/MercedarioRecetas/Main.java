@@ -10,18 +10,11 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Facade facade = new Facade();
 
+        // Display the customized restaurant banner
+        printRestaurantBanner();
+
         while (true) {
-            System.out.println("Seleccione una opción:");
-            System.out.println("1. Crear una nueva receta");
-            System.out.println("2. Ver todas las recetas");
-            System.out.println("3. Editar una receta");
-            System.out.println("4. Eliminar una receta");
-            System.out.println("5. Preparar una receta");
-            System.out.println("6. Ver todos los ingredientes");
-            System.out.println("7. Agregar un ingrediente");
-            System.out.println("8. Editar un ingrediente");
-            System.out.println("9. Eliminar un ingrediente");
-            System.out.println("10. Salir");
+            printMainMenu();
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character
@@ -63,6 +56,39 @@ public class Main {
             }
         }
     }
+
+    // Customized ASCII art for the restaurant banner
+    private static void printRestaurantBanner() {
+        System.out.println("  ████████╗██╗  ██╗███████╗    ██████╗ ██████╗ ██████╗ ██╗     ██████╗ ");
+        System.out.println("  ╚══██╔══╝██║  ██║██╔════╝   ██╔════╝██╔═══██╗██╔══██╗██║     ██╔══██╗");
+        System.out.println("     ██║   ███████║███████╗   ██║     ██║   ██║██████╔╝██║     ██████╔╝");
+        System.out.println("     ██║   ██╔══██║╚════██║   ██║     ██║   ██║██╔══██╗██║     ██╔══██╗");
+        System.out.println("     ██║   ██║  ██║███████║   ╚██████╗╚██████╔╝██║  ██║███████╗██████╔╝");
+        System.out.println("     ╚═╝   ╚═╝  ╚═╝╚══════╝    ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═════╝ \n");
+        System.out.println("  ¡Bienvenido al Restaurante Mercedario Recetas!\n");
+    }
+
+    // ASCII art for the main menu
+    private static void printMainMenu() {
+        System.out.println("┌─────────────────────────────-┐");
+        System.out.println("│  Mercedario Recetas Menu     │");
+        System.out.println("├─────────────────────────────-┤");
+        System.out.println("│ Seleccione una opción:       │");
+        System.out.println("├─────────────────────────────-┤");
+        System.out.println("│ 1. Crear una nueva receta    │");
+        System.out.println("│ 2. Ver todas las recetas     │");
+        System.out.println("│ 3. Editar una receta         │");
+        System.out.println("│ 4. Eliminar una receta       │");
+        System.out.println("│ 5. Preparar una receta       │");
+        System.out.println("│ 6. Ver todos los ingredientes│");
+        System.out.println("│ 7. Agregar un ingrediente    │");
+        System.out.println("│ 8. Editar un ingrediente     │");
+        System.out.println("│ 9. Eliminar un ingrediente   │");
+        System.out.println("│ 10. Salir                    │");
+        System.out.println("└─────────────────────────────-┘");
+        System.out.print("Ingrese su elección: ");
+    }
+
 
     private static void createRecipe(Scanner scanner, Facade facade) {
         Recipe newRecipe = new Recipe();
@@ -172,11 +198,11 @@ public class Main {
         newRecipe.setNameRecipe(recipeName);
 
         System.out.print("Ingrese el nuevo tiempo de preparación (horas): ");
-        int preparationTime = scanner.nextInt();
+        int preparationTime = Integer.parseInt(scanner.nextLine());
         newRecipe.setPreparationTime(preparationTime);
 
         System.out.print("Ingrese la nueva cantidad de porciones: ");
-        int serves = scanner.nextInt();
+        int serves = Integer.parseInt(scanner.nextLine());
         newRecipe.setServes(serves);
 
         List<RecipeIngredient> ingredientList = new ArrayList<>();
@@ -186,8 +212,7 @@ public class Main {
             ingredientList.add(recipeIngredient);
 
             System.out.print("¿Desea agregar otro ingrediente? (S/N): ");
-            String continueAdding = scanner.next();
-            scanner.nextLine(); // Consume the newline character
+            String continueAdding = scanner.nextLine();
             if (!continueAdding.equalsIgnoreCase("S")) {
                 break;
             }
