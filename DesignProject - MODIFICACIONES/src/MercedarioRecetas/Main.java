@@ -99,12 +99,16 @@ public class Main {
         String recipeName = scanner.nextLine();
         newRecipe.setNameRecipe(recipeName);
 
-        System.out.print("Ingrese el tiempo de preparación (horas): ");
+        System.out.println("======================================");
+        System.out.print("\u001B[36mIngrese el tiempo de preparación (horas):\u001B[0m");
+        System.out.println("======================================");
         int preparationTime = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character
         newRecipe.setPreparationTime(preparationTime);
 
-        System.out.print("Ingrese la cantidad de porciones: ");
+        System.out.println("======================================");
+        System.out.print("\u001B[36mIngrese la cantidad de porciones:\u001B[0m");
+        System.out.println("======================================");
         int serves = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character
         newRecipe.setServes(serves);
@@ -131,13 +135,14 @@ public class Main {
         newRecipe.setPreparationDescription(preparationDescription);
 
         facade.addRecipe(newRecipe);
-        System.out.println("Receta creada con éxito.");
+        System.out.println("\u001B[32mReceta creada con éxito.\u001B[0m");
     }
 
     private static RecipeIngredient createRecipeIngredient(Scanner scanner) {
         RecipeIngredient recipeIngredient = new RecipeIngredient();
 
-        System.out.print("Ingrese el nombre del ingrediente: ");
+        System.out.println("======================================");
+        System.out.print("\u001B[36mIngrese el nombre del ingrediente: \u001B[0m");
         String ingredientName = scanner.nextLine();
 
         Ingredientes ingredient = new Ingredientes();
@@ -172,22 +177,24 @@ public class Main {
         List<Recipe> recipes = facade.viewAllRecipes();
 
         if (recipes.isEmpty()) {
-            System.out.println("No hay recetas disponibles.");
+            System.out.println("\u001B[33mNo hay recetas disponibles.\u001B[0m");
         } else {
-            System.out.println("Recetas disponibles:");
+            System.out.println("\u001B[32mRecetas disponibles:\u001B[0m");
             for (Recipe recipe : recipes) {
-                System.out.println("Nombre de la receta: " + recipe.getNameRecipe());
-                System.out.println("Tiempo de preparación (horas): " + recipe.getPreparationTime());
-                System.out.println("Porciones: " + recipe.getServes());
-                System.out.println("Ingredientes:");
+                System.out.println("======================================");
+                System.out.println("\u001B[36mNombre de la receta: " + recipe.getNameRecipe() + "\u001B[0m");
+                System.out.println("\u001B[36mTiempo de preparación (horas): " + recipe.getPreparationTime() + "\u001B[0m");
+                System.out.println("\u001B[36mPorciones: " + recipe.getServes() + "\u001B[0m");
+                System.out.println("\u001B[36mIngredientes:\u001B[0m");
                 for (RecipeIngredient recipeIngredient : recipe.getIngredientList()) {
-                    System.out.println("- " + recipeIngredient.getIngredient().getNameIngredient() + ": " + recipeIngredient.getQuantity());
+                    System.out.println("\u001B[36m- " + recipeIngredient.getIngredient().getNameIngredient() + ": " + recipeIngredient.getQuantity() + "\u001B[0m");
                 }
-                System.out.println("Descripción de preparación: " + recipe.getPreparationDescription());
-                System.out.println();
+                System.out.println("\u001B[36mDescripción de preparación: " + recipe.getPreparationDescription() + "\u001B[0m");
             }
+            System.out.println("======================================");
         }
     }
+
 
     private static void editRecipe(Scanner scanner, Facade facade) {
         System.out.print("Ingrese el nombre de la receta que desea editar: ");
@@ -195,15 +202,16 @@ public class Main {
 
         Recipe newRecipe = new Recipe();
 
-        System.out.print("Ingrese el nuevo nombre de la receta: ");
+        System.out.println("======================================");
+        System.out.print("\u001B[36mIngrese el nuevo nombre de la receta: \u001B[0m");
         String recipeName = scanner.nextLine();
         newRecipe.setNameRecipe(recipeName);
 
-        System.out.print("Ingrese el nuevo tiempo de preparación (horas): ");
+        System.out.print("\u001B[36mIngrese el nuevo tiempo de preparación (horas): \u001B[0m");
         int preparationTime = Integer.parseInt(scanner.nextLine());
         newRecipe.setPreparationTime(preparationTime);
 
-        System.out.print("Ingrese la nueva cantidad de porciones: ");
+        System.out.print("\u001B[36mIngrese la nueva cantidad de porciones: \u001B[0m");
         int serves = Integer.parseInt(scanner.nextLine());
         newRecipe.setServes(serves);
 
@@ -227,7 +235,7 @@ public class Main {
         newRecipe.setPreparationDescription(preparationDescription);
 
         facade.editRecipe(oldRecipeName, newRecipe);
-        System.out.println("Receta editada con éxito.");
+        System.out.println("\u001B[32mReceta editada con éxito.\u001B[0m");
     }
 
     private static void deleteRecipe(Scanner scanner, Facade facade) {
