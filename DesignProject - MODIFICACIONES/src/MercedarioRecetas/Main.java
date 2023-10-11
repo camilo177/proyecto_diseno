@@ -93,7 +93,9 @@ public class Main {
     private static void createRecipe(Scanner scanner, Facade facade) {
         Recipe newRecipe = new Recipe();
 
-        System.out.print("Ingrese el nombre de la receta: ");
+        System.out.println("======================================");
+        System.out.println("\u001B[36mIngrese el nombre de la receta:\u001B[0m");
+        System.out.println("======================================");
         String recipeName = scanner.nextLine();
         newRecipe.setNameRecipe(recipeName);
 
