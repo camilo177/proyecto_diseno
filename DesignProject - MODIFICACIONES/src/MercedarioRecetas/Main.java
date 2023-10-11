@@ -95,20 +95,17 @@ public class Main {
 
         System.out.println("======================================");
         System.out.println("\u001B[36mIngrese el nombre de la receta:\u001B[0m");
-        System.out.println("======================================");
         String recipeName = scanner.nextLine();
         newRecipe.setNameRecipe(recipeName);
 
         System.out.println("======================================");
         System.out.print("\u001B[36mIngrese el tiempo de preparación (horas):\u001B[0m");
-        System.out.println("======================================");
         int preparationTime = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character
         newRecipe.setPreparationTime(preparationTime);
 
         System.out.println("======================================");
         System.out.print("\u001B[36mIngrese la cantidad de porciones:\u001B[0m");
-        System.out.println("======================================");
         int serves = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character
         newRecipe.setServes(serves);
