@@ -5,60 +5,77 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Facade {
-    private Recipe recipe;
+
+    // Lista de recetas
     private List<Recipe> recipeList;
-    private List<RecipeIngredient> allIngredients; // List to store all ingredients
 
+     // Constructor de la clase Facade
     public Facade() {
-        this.recipe = new Recipe();
-        this.recipeList = new ArrayList<>();
-        this.allIngredients = new ArrayList<>();
+         this.recipeList = new ArrayList<>();
     }
 
-    // Methods for managing RecipeIngredients
+     // Obtener la lista de recetas
+    public List<Recipe> getRecipeList() {
+        return recipeList;
+    }
 
-    public void addRecipeIngredient(RecipeIngredient recipeIngredient) {
-        if (recipe.getIngredientList() == null) {
-            recipe.setIngredientList(new ArrayList<>());
+    // Establecer la lista de recetas
+    public void setRecipeList(List<Recipe> recipeList) {
+        this.recipeList = recipeList;
+    }
+
+     // Método para eliminar un ingrediente de una receta por su nombre
+    public boolean deleteRecipeIngredient(String ingredientName, String recipeName) {
+        for (Recipe recipe : recipeList) {
+            if (recipe.getNameRecipe().equals(recipeName)) {
+                Iterator<RecipeIngredient> iterator = recipe.getIngredientList().iterator();
+                while (iterator.hasNext()) {
+                    RecipeIngredient recipeIngredient = iterator.next();
+                    if (recipeIngredient.getIngredient().getNameIngredient().equals(ingredientName)) {
+                        iterator.remove();
+                        System.out.println("Ingrediente '" + ingredientName + "' eliminado de la receta '" + recipeName + "'.");
+                        return true;  // Ingrediente eliminado exitosamente
+                    }
+                }
+            }
         }
-
-        recipe.getIngredientList().add(recipeIngredient);
-        allIngredients.add(recipeIngredient); // Add the ingredient to the allIngredients list
+        System.out.println("No se encontro la receta '" + recipeName + "' o el ingrediente '" + ingredientName + "'.");
+        return false; // No se encontró la receta o el ingrediente
     }
 
-    public void editRecipeIngredient(String oldIngredientName, RecipeIngredient newRecipeIngredient) {
-        Iterator<RecipeIngredient> iterator = recipe.getIngredientList().iterator();
-        while (iterator.hasNext()) {
-            RecipeIngredient recipeIngredient = iterator.next();
-            if (recipeIngredient.calculateIngredients().equals(oldIngredientName)) {
-                iterator.remove();
-                recipe.getIngredientList().add(newRecipeIngredient);
-                allIngredients.remove(recipeIngredient); // Remove the old ingredient from allIngredients
-                allIngredients.add(newRecipeIngredient); // Add the new ingredient to allIngredients
+    // Método para agregar una receta a la lista de recetas, el metodo evita que se creen recetas con el mismo nombre. 
+    public void addRecipe(Recipe newRecipe) {
+        boolean recipeExists = false;
+
+        for (Recipe existingRecipe : recipeList) {
+            if (existingRecipe.getNameRecipe().equals(newRecipe.getNameRecipe())) {
+                recipeExists = true;
                 break;
             }
         }
+
+        if (!recipeExists) {
+            recipeList.add(newRecipe);
+            System.out.println("Receta agregada exitosamente.");
+        } else {
+            System.out.println("Ya existe una receta con el mismo nombre. La receta no se agrego.");
+        }
     }
 
-    public boolean deleteRecipeIngredient(String ingredientName) {
-        Iterator<RecipeIngredient> iterator = recipe.getIngredientList().iterator();
+    // Método para eliminar una receta por su nombre
+    public boolean deleteRecipe(String recipeName) {
+        Iterator<Recipe> iterator = recipeList.iterator();
         while (iterator.hasNext()) {
-            RecipeIngredient recipeIngredient = iterator.next();
-            if (recipeIngredient.calculateIngredients().equals(ingredientName)) {
+            Recipe existingRecipe = iterator.next();
+            if (existingRecipe.getNameRecipe().equals(recipeName)) {
                 iterator.remove();
-                allIngredients.remove(recipeIngredient); // Remove the ingredient from allIngredients
-                return true; // El ingrediente se eliminó con éxito
+                return true; // Receta eliminada con éxito
             }
         }
-        return false; // No se encontró el ingrediente
+        return false; // Receta no encontrada
     }
 
-    // Methods for managing Recipes
-
-    public void addRecipe(Recipe newRecipe) {
-        recipeList.add(newRecipe);
-    }
-
+    // Método para editar una receta
     public void editRecipe(String oldRecipeName, Recipe newRecipe) {
         for (int i = 0; i < recipeList.size(); i++) {
             Recipe existingRecipe = recipeList.get(i);
@@ -69,44 +86,45 @@ public class Facade {
         }
     }
 
-    public boolean deleteRecipe(String recipeName) {
-        Iterator<Recipe> iterator = recipeList.iterator();
-        while (iterator.hasNext()) {
-            Recipe existingRecipe = iterator.next();
-            if (existingRecipe.getNameRecipe().equals(recipeName)) {
-                iterator.remove();
-                return true; // Recipe deleted successfully
-            }
-        }
-        return false; // Recipe not found
-    }
-
+    //Metodo Preparar recetas
     public void prepareRecipe(String recipeName) {
         for (Recipe existingRecipe : recipeList) {
             if (existingRecipe.getNameRecipe().equals(recipeName)) {
-                // Implement logic to prepare the recipe here
+                // Implementación para preparar la receta aquí
                 System.out.println("Preparing " + recipeName + "...");
-                // Example: Print preparation steps
-                System.out.println("Paso 1: Inicio de preparación");
-                System.out.println("Paso 2: Receta en preparación");
-                System.out.println("Receta preparada!");
+                // Ejemplo: Mostrar los pasos de preparación
+                System.out.println("Step 1: Start preparing");
+                System.out.println("Step 2: Recipe in progress");
+                System.out.println("Recipe prepared!");
                 return;
             }
         }
         System.out.println("Recipe not found.");
     }
 
-    public List<RecipeIngredient> viewRecipeIngredient() {
-        return recipe.getIngredientList();
+    // Método para ver la lista de ingredientes en una receta
+    public List<RecipeIngredient> viewRecipeIngredient(String recipeName) {
+        for (Recipe existingRecipe : recipeList) {
+            if (existingRecipe.getNameRecipe().equals(recipeName)) {
+                return existingRecipe.getIngredientList();
+            }
+        }
+        return null; // La receta no se encontró
     }
 
-    // Method to view all recipes
+    //Metodo para mirar todas las recetas creadas
     public List<Recipe> viewAllRecipes() {
-        return recipeList;
+        return new ArrayList<>(recipeList);
     }
 
-    // Method to view all ingredients
+    //Metodo para mirar la lista de ingredientes completa
     public List<RecipeIngredient> viewAllIngredients() {
+        List<RecipeIngredient> allIngredients = new ArrayList<>();
+        for (Recipe recipe : recipeList) {
+            if (recipe.getIngredientList() != null) {
+                allIngredients.addAll(recipe.getIngredientList());
+            }
+        }
         return allIngredients;
     }
 

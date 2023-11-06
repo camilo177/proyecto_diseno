@@ -1,16 +1,16 @@
 package MercedarioRecetas;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Recipe {
 
     private String nameRecipe;
-    private int preparationTime;  // en horas
+    private int preparationTime;
     private int serves;
-    private List<RecipeIngredient> ingredientList; //la lista de ingredientes tienen que ir creada en esta case o en recipeingredintes?
+    private List<RecipeIngredient> ingredientList;
     private String preparationDescription;
-
+    
+    // Constructores
     public Recipe() {
     }
 
@@ -21,13 +21,19 @@ public class Recipe {
         this.ingredientList = ingredientList;
         this.preparationDescription = preparationDescription;
     }
+    
+    // Getter and Setter 
 
     public String getNameRecipe() {
         return nameRecipe;
     }
 
-    public void setNameRecipe(String nameRecipe) {
-        this.nameRecipe = nameRecipe;
+     public void setNameRecipe(String nameRecipe) {
+        if (nameRecipe != null && !nameRecipe.isEmpty()) {
+            this.nameRecipe = nameRecipe;
+        } else {
+            throw new IllegalArgumentException("El nombre de la receta no puede estar vacio.");
+        }
     }
 
     public int getPreparationTime() {
@@ -35,7 +41,11 @@ public class Recipe {
     }
 
     public void setPreparationTime(int preparationTime) {
-        this.preparationTime = preparationTime;
+        if (preparationTime >= 0) {
+            this.preparationTime = preparationTime;
+        } else {
+            throw new IllegalArgumentException("El tiempo de preparacion debe ser un valor no negativo.");
+        }
     }
 
     public int getServes() {
@@ -43,7 +53,11 @@ public class Recipe {
     }
 
     public void setServes(int serves) {
-        this.serves = serves;
+        if (serves >= 0) {
+            this.serves = serves;
+        } else {
+            throw new IllegalArgumentException("El numero de porciones debe ser un valor no negativo.");
+        }
     }
 
     public List<RecipeIngredient> getIngredientList() {
@@ -51,7 +65,11 @@ public class Recipe {
     }
 
     public void setIngredientList(List<RecipeIngredient> ingredientList) {
-        this.ingredientList = ingredientList;
+        if (ingredientList != null && !ingredientList.isEmpty()) {
+            this.ingredientList = ingredientList;
+        } else {
+            throw new IllegalArgumentException("La lista de ingredientes no puede estar vacia.");
+        }
     }
 
     public String getPreparationDescription() {
@@ -59,10 +77,14 @@ public class Recipe {
     }
 
     public void setPreparationDescription(String preparationDescription) {
-        this.preparationDescription = preparationDescription;
+        if (preparationDescription != null && !preparationDescription.isEmpty()) {
+            this.preparationDescription = preparationDescription;
+        } else {
+            throw new IllegalArgumentException("La descripción de preparación no puede estar vacía.");
+        }
     }
 
-
+    // Método para obtener una representación en cadena de la receta
     @Override
     public String toString() {
         return "Recipe{" + "nameRecipe=" + nameRecipe + ", preparationTime=" + preparationTime + ", serves=" + serves + ", ingredientList=" + ingredientList + ", preparationDescription=" + preparationDescription + '}';
