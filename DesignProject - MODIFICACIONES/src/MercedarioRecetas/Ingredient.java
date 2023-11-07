@@ -72,6 +72,7 @@ public class Ingredient {
             throw new IllegalArgumentException("Las calorias por unidad deben ser un valor no negativo.");
         }
     }
+
 // Método para obtener una representación en cadena del ingrediente
     @Override
     public String toString() {

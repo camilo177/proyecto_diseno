@@ -5,6 +5,7 @@ public class User {
     private String userName;
     private String password;
     private USER_TYPE userType;
+    private final boolean sesionIniciada = false;
 
     // Constructores
     public User() {
