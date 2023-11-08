@@ -206,8 +206,8 @@ public class Mercedario {
     private static void printMenuRecetas(Scanner scanner, Facade facade, User user) {
         while (true) {
             System.out.println("\u001B[34m┌─────────────────────────────-┐");
-            System.out.println("│  Mercedario Recetas Menu     │");
-            System.out.println("├─────────────────────────────-┤");
+            System.out.println("│  Mercedario Recetas Menu               │");
+            System.out.println("├────────────────────────────┤");
             System.out.println("│ Seleccione una opcion:       │");
             System.out.println("├─────────────────────────────-┤");
             System.out.println("│ 1. \u001B[36mVer Lista de Recetas      \u001B[34m│");
