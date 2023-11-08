@@ -522,16 +522,16 @@ public class Mercedario {
     private static void printMenuIngredientes(Scanner scanner, Facade facade, User user) {
         while (true) {
             System.out.println("┌──────────────────────────────────── ┐");
-            System.out.println("│  Mercedario Recetas Menu      │");
-            System.out.println("├─────────────────────────────────────- ┤");
-            System.out.println("│ Seleccione una opcion:         │");
-            System.out.println("├─────────────────────────────────────- ┤");
-            System.out.println("│ 1. Ver Lista de Ingredientes   │");
-            System.out.println("│ 2. Agregar Nuevo Ingrediente   │");
-            System.out.println("│ 3. Eliminar Ingrediente        │");
-            System.out.println("│ 4. Editar Ingrediente        │");
-            System.out.println("│ 5. Salir                       │");
-            System.out.println("└───────────────────────────────────────-┘");
+            System.out.println("│  Mercedario Recetas Menu            │");
+            System.out.println("├─────────────────────────────────────┤");
+            System.out.println("│ Seleccione una opcion:              │");
+            System.out.println("├─────────────────────────────────────┤");
+            System.out.println("│ 1. Ver Lista de Ingredientes        │");
+            System.out.println("│ 2. Agregar Nuevo Ingrediente        │");
+            System.out.println("│ 3. Eliminar Ingrediente             │");
+            System.out.println("│ 4. Editar Ingrediente               │");
+            System.out.println("│ 5. Salir                            │");
+            System.out.println("└─────────────────────────────────────┘");
             System.out.print("Ingrese su eleccion: ");
 
             int printMenuIngredientes = scanner.nextInt();
