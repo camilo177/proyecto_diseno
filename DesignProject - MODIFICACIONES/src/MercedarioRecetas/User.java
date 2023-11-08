@@ -67,4 +67,8 @@ public class User {
         return password.length() >= 8; // Ejemplo: Contraseña debe tener al menos 8 caracteres
     }
 
+	public boolean isSesionIniciada() {
+		return sesionIniciada;
+	}
+
 }

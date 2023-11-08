@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+@SuppressWarnings("unused")
 public class Facade {
 
     // Lista de recetas
