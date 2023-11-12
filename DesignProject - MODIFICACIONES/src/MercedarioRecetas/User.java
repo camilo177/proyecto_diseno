@@ -70,4 +70,8 @@ public class User {
         return sesionIniciada;
     }
 
+	public boolean isSesionIniciada() {
+		return sesionIniciada;
+	}
+
 }
