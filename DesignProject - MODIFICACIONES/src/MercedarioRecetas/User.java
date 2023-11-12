@@ -35,16 +35,16 @@ public class User {
     public void setUserType(USER_TYPE userType) {
         this.userType = userType;
     }
-    
+
     // Método estático para crear un nuevo usuario
-     public static User createUser(String userName, String password, USER_TYPE userType) {
+    public static User createUser(String userName, String password, USER_TYPE userType) {
         User newUser = new User();
         newUser.setUserName(userName);
         newUser.setPassword(password);
         newUser.setUserType(userType);
         return newUser;
     }
-    
+
     // Método para autenticar al usuario
     public boolean authenticate(USER_TYPE userType, String password) {
         if (this.userType == userType) {
@@ -63,8 +63,11 @@ public class User {
     // Método privado para verificar si la contraseña cumple con los criterios de validación
     private boolean isValidPassword(String password) {
         // Implementa tus criterios de validación de contraseña aquí
-        // Por ejemplo, verifica la longitud mínima, caracteres especiales, etc.
-        return password.length() >= 8; // Ejemplo: Contraseña debe tener al menos 8 caracteres
+        return password.length() >= 8 && password.matches(".*[A-Za-z].*\\d.*");
+    }
+
+    public boolean isSesionIniciada() {
+        return sesionIniciada;
     }
 
 }

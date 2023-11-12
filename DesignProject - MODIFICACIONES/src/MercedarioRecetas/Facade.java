@@ -3,7 +3,6 @@ package MercedarioRecetas;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Scanner;
 
 public class Facade {
 
@@ -104,7 +103,7 @@ public class Facade {
                     System.out.println("  Calorias por unidad: " + ingredient.getCaloriesPerUnit());
                     System.out.println("  Calorias totales: " + recipeIngredient.calculateCalories());
                 }
-                
+
                 System.out.println("1. Iniciar la preparacion.");
                 System.out.println("Pasos de Preparacion:");
                 System.out.println("\u001B[36mDescripcion de Preparacion:\u001B[0m " + existingRecipe.getPreparationDescription());
@@ -159,7 +158,7 @@ public class Facade {
                     System.out.println("  Costo por unidad: $" + ingredient.getValuePerUnit());
                     System.out.println("  Costo total: $" + recipeIngredient.calculateCost());
                     System.out.println("  Calorías por unidad: " + ingredient.getCaloriesPerUnit());
-                    System.out.println("  Calorías totales: " + recipeIngredient.calculateCalories());
+                    System.out.println("  Calorias totales: " + recipeIngredient.calculateCalories());
                     System.out.println("--------------------------------------");
                 }
                 System.out.println("======================================");
@@ -216,6 +215,29 @@ public class Facade {
             System.out.println("No se encontró el ingrediente '" + ingredientName + "'.");
             return false; // No se encontró el ingrediente
         }
+    }
+
+    // Método para editar un ingrediente
+    public boolean editIngredient(String oldIngredientName, Ingredient newIngredient) {
+        // Busca el ingrediente en la lista de ingredientes
+        for (Ingredient existingIngredient : allIngredients) {
+            if (existingIngredient.getNameIngredient().equals(oldIngredientName)) {
+                // Verifica si el nuevo nombre ya está en uso
+                if (!oldIngredientName.equals(newIngredient.getNameIngredient())
+                        && allIngredients.stream().anyMatch(i -> i.getNameIngredient().equals(newIngredient.getNameIngredient()))) {
+                    System.out.println("Ya existe un ingrediente con el nuevo nombre. No se puede editar.");
+                    return false; // Ingrediente no editado
+                }
+
+                existingIngredient.setNameIngredient(newIngredient.getNameIngredient());
+                existingIngredient.setValuePerUnit(newIngredient.getValuePerUnit());
+                existingIngredient.setCaloriesPerUnit(newIngredient.getCaloriesPerUnit());
+                System.out.println("Ingrediente editado con éxito.");
+                return true; // Ingrediente editado con éxito
+            }
+        }
+        System.out.println("No se encontró el ingrediente con el nombre '" + oldIngredientName + "'.");
+        return false; // Ingrediente no encontrado
     }
 
     //Metodo para mirar la lista de ingredientes completa

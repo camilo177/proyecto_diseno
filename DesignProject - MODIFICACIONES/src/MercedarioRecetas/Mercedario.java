@@ -13,44 +13,41 @@ public class Mercedario {
         User user = new User();
 
         initializeUser(user); // Inicializa el usuario con valores predeterminados
-        boolean iniciarSesion = false;
+        boolean logIn = false;
 
         // Display the customized restaurant banner
         printRestaurantBanner();
 
         while (true) {
-            printMainMenuIniciarSesion(iniciarSesion);
+            printMainMenuLogIn(logIn);
 
-            int printMainMenuIniciarSesionChoice = scanner.nextInt();
+            int printMenuLogInChoice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character
 
-            switch (printMainMenuIniciarSesionChoice) {
-                case 1:
-                    iniciarSesion = toggleSesion(iniciarSesion, user, scanner);
-                    if (iniciarSesion) {
-                        printSegundoMenu(scanner, facade, user);
+            switch (printMenuLogInChoice) {
+                case 1 -> {
+                    logIn = toggleSesion(logIn, user, scanner);
+                    if (logIn) {
+                        printSecondMenu(scanner, facade, user);
                     } else {
                         System.out.println("Debes iniciar sesion para acceder a esta opcion.");
                     }
-
-                    break;
-                case 2:
-                    createUserIfNotLoggedIn(iniciarSesion, scanner);
-                    if (toggleSesion(iniciarSesion, user, scanner)) {
-                        printSegundoMenu(scanner, facade, user);
-                        iniciarSesion = true;
+                }
+                case 2 -> {
+                    createUserIfNotLoggedIn(logIn, scanner);
+                    if (toggleSesion(logIn, user, scanner)) {
+                        printSecondMenu(scanner, facade, user);
+                        logIn = true;
                     } else {
                         System.out.println("Debes iniciar sesion para acceder a esta opcion.");
                     }
-
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     System.out.println("HASTA LUEGO!");
                     System.exit(0);
-                    break;
-                default:
+                }
+                default ->
                     System.out.println("Opcion invalida. Por favor, seleccione una opcion valida.");
-                    break;
             }
 
         }
@@ -69,26 +66,8 @@ public class Mercedario {
 
     }
 
-    //Usuario por defecto
-    private static void initializeUser(User user) {
-        user.setUserName("DiegoChef");
-        user.setPassword("123456789");
-        user.setUserType(USER_TYPE.Chef);
-    }
-
-    //Verifica si la sesion esta iniciada o no
-    private static boolean toggleSesion(boolean iniciarSesion, User user, Scanner scanner) {
-        if (iniciarSesion) {
-            iniciarSesion = false;
-            System.out.println("Sesion cerrada.");
-        } else {
-            iniciarSesion = loginUser(scanner, user);
-        }
-        return iniciarSesion;
-    }
-
     //Meno Inicial
-    private static void printMainMenuIniciarSesion(boolean iniciarSesion) {
+    private static void printMainMenuLogIn(boolean logIn) {
         System.out.println("┌───────────────────────────────────┐");
         System.out.println("│   Mercedario Recetas Menu  │");
         System.out.println("├───────────────────────────────────┤");
@@ -99,6 +78,25 @@ public class Mercedario {
         System.out.println("│ 3. Salir                   │");
         System.out.println("└───────────────────────────────────┘");
         System.out.print("Ingrese su eleccion: ");
+    }
+
+    //Usuario por defecto
+    private static void initializeUser(User user) {
+        user.setUserName("DiegoChef");
+        user.setPassword("1234diego@");
+        user.setUserType(USER_TYPE.Chef);
+
+    }
+
+    //Verifica si la sesion esta iniciada o no
+    private static boolean toggleSesion(boolean logIn, User user, Scanner scanner) {
+        if (logIn) {
+            logIn = false;
+            System.out.println("Sesion cerrada.");
+        } else {
+            logIn = loginUser(scanner, user);
+        }
+        return logIn;
     }
 
     //Metodo para iniciar sesion
@@ -137,6 +135,11 @@ public class Mercedario {
                 System.out.print("Ingresa un nuevo nombre de usuario: ");
                 String newUserName = scanner.nextLine();
                 System.out.print("Ingresa una nueva contrasena: ");
+                // Presentar criterios de validación para la contraseña
+                System.out.println("\nLa contrasena debe cumplir con los siguientes criterios:");
+                System.out.println("- Al menos 8 caracteres.");
+                System.out.println("- Al menos una letra y un numero.");
+                System.out.println("- Puede incluir caracteres especiales como @, #, $, %, ^, &, +, y !.");
                 String newPassword = scanner.nextLine();
 
                 USER_TYPE userType;
@@ -170,7 +173,7 @@ public class Mercedario {
     }
 
     //Segundo Menu (Despues de iniciar sesion)
-    private static void printSegundoMenu(Scanner scanner, Facade facade, User user) {
+    private static void printSecondMenu(Scanner scanner, Facade facade, User user) {
         while (true) {
             System.out.println("┌──────────────────────────────────────-┐");
             System.out.println("│  Mercedario Recetas Menu      │");
@@ -183,27 +186,26 @@ public class Mercedario {
             System.out.println("└───────────────────────────────────────┘");
             System.out.print("Ingrese su eleccion: ");
 
-            int SegundoMenuChoice = scanner.nextInt();
+            int SecondMenuChoice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character
 
-            switch (SegundoMenuChoice) {
-                case 1:
+            switch (SecondMenuChoice) {
+                case 1 -> {
                     System.out.println("Sesion cerrada.");
                     return;
-                case 2:
-                    printMenuRecetas(scanner, facade, user);
-                    break;
-                case 3:
-                    printMenuIngredientes(scanner, facade, user);
-                    break;
-                default:
+                }
+                case 2 ->
+                    printMenuRecipes(scanner, facade, user);
+                case 3 ->
+                    printMenuIngredient(scanner, facade, user);
+                default ->
                     System.out.println("Opción no valida. Intentalo de nuevo.");
             }
         }
     }
 
     //Tercer Menu opciones para Recetas
-    private static void printMenuRecetas(Scanner scanner, Facade facade, User user) {
+    private static void printMenuRecipes(Scanner scanner, Facade facade, User user) {
         while (true) {
             System.out.println("\u001B[34m┌─────────────────────────────-┐");
             System.out.println("│  Mercedario Recetas Menu     │");
@@ -224,7 +226,8 @@ public class Mercedario {
             scanner.nextLine(); // Consume the newline character
 
             switch (choice) {
-                case 1 -> viewAllRecipes(facade);
+                case 1 ->
+                    viewAllRecipes(facade);
                 case 2 -> {
                     if (user.getUserType() == USER_TYPE.Chef || user.getUserType() == USER_TYPE.Administrator) {
                         createRecipe(scanner, facade);
@@ -239,11 +242,16 @@ public class Mercedario {
                         System.out.println("No tienes permiso para eliminar recetas.");
                     }
                 }
-                case 4 -> prepareRecipe(scanner, facade);
-                case 5 -> editRecipe(scanner, facade);
-                case 6 -> deleteRecipeIngredient(scanner, facade, user);
-                case 7 -> printSegundoMenu(scanner, facade, user);
-                default -> System.out.println("Opcion no valida. Intentalo de nuevo.");
+                case 4 ->
+                    prepareRecipe(scanner, facade);
+                case 5 ->
+                    editRecipe(scanner, facade);
+                case 6 ->
+                    deleteRecipeIngredient(scanner, facade, user);
+                case 7 ->
+                    printSecondMenu(scanner, facade, user);
+                default ->
+                    System.out.println("Opcion no valida. Intentalo de nuevo.");
             }
         }
     }
@@ -314,12 +322,13 @@ public class Mercedario {
         }
     }
 
-    //Metodo para crear nuevas Recetas.
     private static void createRecipe(Scanner scanner, Facade facade) {
+
+// Verificar si el usuario tiene permiso para eliminar ingredientes
         Recipe newRecipe = new Recipe();
 
         System.out.println("--------------------------------------------------");
-        System.out.println("\u001B[36mIngrese el nombre de la receta:\u001B[0m");
+        System.out.print("\u001B[36mIngrese el nombre de la receta:\u001B[0m ");
         String recipeName = scanner.nextLine();
         newRecipe.setNameRecipe(recipeName);
 
@@ -338,13 +347,48 @@ public class Mercedario {
         List<RecipeIngredient> ingredientList = new ArrayList<>();
 
         while (true) {
-            RecipeIngredient recipeIngredient = createRecipeIngredient(scanner, facade);
-            ingredientList.add(recipeIngredient);
+            System.out.println("--------------------------------------------------");
+            System.out.print("\u001B[36mDesea agregar un ingrediente existente o crear uno nuevo? (Existente/Nuevo):\u001B[0m ");
+            String choice = scanner.nextLine();
+
+            if (choice.equalsIgnoreCase("Existente")) {
+                // Mostrar la lista de ingredientes existentes
+                facade.viewAllIngredients().forEach(ingredient
+                        -> System.out.println(ingredient.getNameIngredient()));
+
+                System.out.print("\u001B[36mIngrese el nombre del ingrediente existente:\u001B[0m ");
+                String existingIngredientName = scanner.nextLine();
+
+                boolean ingredientFound = false;
+                for (Ingredient ingredient : facade.viewAllIngredients()) {
+                    if (ingredient.getNameIngredient().equalsIgnoreCase(existingIngredientName)) {
+                        RecipeIngredient recipeIngredient = new RecipeIngredient();
+                        recipeIngredient.setIngredient(ingredient);
+
+                        System.out.print("\u001B[36mIngrese la cantidad (lb):\u001B[0m ");
+                        double quantity = scanner.nextDouble();
+                        scanner.nextLine(); // Consume the newline character
+                        recipeIngredient.setQuantity(quantity);
+
+                        ingredientList.add(recipeIngredient);
+                        ingredientFound = true;
+                        break;
+                    }
+                }
+
+                if (!ingredientFound) {
+                    System.out.println("\u001B[33mIngrediente no encontrado. Por favor, inténtelo de nuevo.\u001B[0m");
+                }
+            } else if (choice.equalsIgnoreCase("Nuevo")) {
+                RecipeIngredient recipeIngredient = createRecipeIngredient(scanner, facade);
+                ingredientList.add(recipeIngredient);
+            } else {
+                System.out.println("\u001B[33mOpción no válida. Por favor, ingrese 'Existente' o 'Nuevo'.\u001B[0m");
+            }
 
             System.out.println("----------------------------------------------");
             System.out.print("\u001B[36mDesea agregar otro ingrediente? (Si/No):\u001B[0m ");
-            String continueAdding = scanner.next();
-            scanner.nextLine(); // Consume the newline character
+            String continueAdding = scanner.nextLine();
             if (!continueAdding.equalsIgnoreCase("Si")) {
                 break;
             }
@@ -353,12 +397,12 @@ public class Mercedario {
         newRecipe.setIngredientList(ingredientList);
 
         System.out.println("--------------------------------------------------");
-        System.out.print("\u001B[36mIngrese la descripcion de preparacion:\u001B[0m ");
+        System.out.print("\u001B[36mIngrese la descripción de preparación:\u001B[0m ");
         String preparationDescription = scanner.nextLine();
         newRecipe.setPreparationDescription(preparationDescription);
 
         facade.addRecipe(newRecipe);
-        System.out.println("\u001B[32mReceta creada con exito.\u001B[0m");
+        System.out.println("\u001B[32mReceta creada con éxito.\u001B[0m");
     }
 
     //Metodo que permite añadir ingredientes junto con recetas
@@ -408,6 +452,7 @@ public class Mercedario {
 
     //Metodo para eliminar Recetas por su nombre
     private static void deleteRecipe(Scanner scanner, Facade facade) {
+
         System.out.println("==================================================");
         System.out.print("\u001B[36mIngrese el nombre de la receta que desea eliminar:\u001B[0m ");
         String recipeName = scanner.nextLine();
@@ -433,6 +478,7 @@ public class Mercedario {
 
     // Método para editar una receta
     private static void editRecipe(Scanner scanner, Facade facade) {
+
         System.out.print("Ingrese el nombre de la receta que desea editar: ");
         String recipeNameToEdit = scanner.nextLine();
 
@@ -484,6 +530,7 @@ public class Mercedario {
 
     //Metodo Para eliminar un ingrediente de una receta 
     private static void deleteRecipeIngredient(Scanner scanner, Facade facade, User user) {
+
         // Verificar si el usuario tiene permiso para eliminar ingredientes
         if (user.getUserType() != USER_TYPE.Chef && user.getUserType() != USER_TYPE.Administrator) {
             System.out.println("\u001B[33mNo tienes permiso para eliminar ingredientes.\u001B[0m");
@@ -519,7 +566,7 @@ public class Mercedario {
     }
 
     //Cuarto Menu opciones para Ingredinetes
-    private static void printMenuIngredientes(Scanner scanner, Facade facade, User user) {
+    private static void printMenuIngredient(Scanner scanner, Facade facade, User user) {
         while (true) {
             System.out.println("┌──────────────────────────────────── ┐");
             System.out.println("│  Mercedario Recetas Menu      │");
@@ -557,13 +604,13 @@ public class Mercedario {
                 }
                 case 4 -> {
                     if (user.getUserType() == USER_TYPE.Chef || user.getUserType() == USER_TYPE.Administrator) {
-                        //(scanner, facade);
+                        editIngredient(scanner, facade);
                     } else {
                         System.out.println("No tienes permiso para eliminar ingredientes.");
                     }
                 }
                 case 5 -> {
-                    printSegundoMenu(scanner, facade, user);
+                    printSecondMenu(scanner, facade, user);
                 }
                 default -> {
                     System.out.println("Opcion no valida. Intentalo de nuevo.");
@@ -593,6 +640,7 @@ public class Mercedario {
     }
 
     private static void createIngredient(Scanner scanner, Facade facade) {
+
         Ingredient newIngredient = new Ingredient();
 
         System.out.println("==================================================");
@@ -631,6 +679,7 @@ public class Mercedario {
     }
 
     private static void deleteIngredient(Scanner scanner, Facade facade) {
+
         System.out.println("==================================================");
         System.out.print("\u001B[36mIngrese el nombre del ingrediente que desea eliminar:\u001B[0m ");
         String ingredientName = scanner.nextLine();
@@ -643,6 +692,40 @@ public class Mercedario {
             System.out.println("Ingrediente '" + ingredientName + "' eliminado exitosamente.");
         } else {
             System.out.println("No se encontro el ingrediente '" + ingredientName + "'.");
+        }
+    }
+
+    private static void editIngredient(Scanner scanner, Facade facade) {
+
+        System.out.print("Ingrese el nombre del ingrediente que desea editar: ");
+        String ingredientNameToEdit = scanner.nextLine();
+
+        System.out.println("\u001B[36mIngrese los nuevos detalles del ingrediente:\u001B[0m");
+
+        System.out.print("Nuevo nombre del ingrediente: ");
+        String newIngredientName = scanner.nextLine();
+
+        System.out.print("Nuevo valor por unidad (pesos): ");
+        double newValuePerUnit = scanner.nextDouble();
+        scanner.nextLine(); // Consumir la nueva línea
+
+        System.out.print("Nuevas calorías por unidad (cal): ");
+        double newCaloriesPerUnit = scanner.nextDouble();
+        scanner.nextLine(); // Consumir la nueva línea
+
+        // Crea un nuevo ingrediente con los detalles actualizados
+        Ingredient newIngredient = new Ingredient();
+        newIngredient.setNameIngredient(newIngredientName);
+        newIngredient.setValuePerUnit(newValuePerUnit);
+        newIngredient.setCaloriesPerUnit(newCaloriesPerUnit);
+
+        // Llama al método editIngredient de la clase Facade
+        boolean editSuccess = facade.editIngredient(ingredientNameToEdit, newIngredient);
+
+        if (editSuccess) {
+            System.out.println("\u001B[32mIngrediente editado con éxito.\u001B[0m");
+        } else {
+            System.out.println("\u001B[33mNo se pudo editar el ingrediente.\u001B[0m");
         }
     }
 
