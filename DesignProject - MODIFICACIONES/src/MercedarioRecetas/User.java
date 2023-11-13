@@ -1,5 +1,5 @@
 package MercedarioRecetas;
-
+//Creando usuarios
 public class User {
 
     private String userName;
