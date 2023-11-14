@@ -177,7 +177,7 @@ public class Mercedario {
         while (true) {
             System.out.println("┌──────────────────────────────────────-┐");
             System.out.println("│  Mercedario Recetas Menu              │");
-            System.out.println("├──────────────────────────────────── ──┤");
+            System.out.println("├────────────────────────────────────-──┤");
             System.out.println("│ Seleccione una opcion:                │");
             System.out.println("├───────────────────────────────────────┤");
             System.out.println("│ 1. Cerrar Sesion                      │");
@@ -207,19 +207,19 @@ public class Mercedario {
     //Tercer Menu opciones para Recetas
     private static void printMenuRecipes(Scanner scanner, Facade facade, User user) {
         while (true) {
-            System.out.println("\u001B[34m┌─────────────────────────────-┐");
-            System.out.println("│  Mercedario Recetas Menu               │");
-            System.out.println("├────────────────────────────┤");
-            System.out.println("│ Seleccione una opcion:       │");
-            System.out.println("├─────────────────────────────-┤");
-            System.out.println("│ 1. \u001B[36mVer Lista de Recetas      \u001B[34m│");
-            System.out.println("│ 2. \u001B[36mAgregar Nueva Receta      \u001B[34m│");
-            System.out.println("│ 3. \u001B[36mEliminar Receta           \u001B[34m│");
-            System.out.println("│ 4. \u001B[36mPreparar Receta           \u001B[34m│");
-            System.out.println("│ 5. \u001B[36mEditar Receta              \u001B[34m│");
-            System.out.println("│ 6. \u001B[36mEliminar Ingrediente de Una Receta \u001B[34m│");
-            System.out.println("│ 7. \u001B[31mSalir                   \u001B[34m│");
-            System.out.println("\u001B[34m└─────────────────────────────-┘");
+            System.out.println("\u001B[34m	┌─────────────────────────────------------------------------┐");
+            System.out.println("			│  Mercedario Recetas Menu                                  │");
+            System.out.println("			├────────────────────────────-------------------------------┤");
+            System.out.println("			│ Seleccione una opcion:      		                	    │");
+            System.out.println("			├─────────────────────────────------------------------------┤");
+            System.out.println("			│ 1. \u001B[36mVer Lista de Recetas               \u001B[34m│");
+            System.out.println("			│ 2. \u001B[36mAgregar Nueva Receta               \u001B[34m│");
+            System.out.println("			│ 3. \u001B[36mEliminar Receta                    \u001B[34m│");
+            System.out.println("			│ 4. \u001B[36mPreparar Receta                    \u001B[34m│");
+            System.out.println("			│ 5. \u001B[36mEditar Receta                      \u001B[34m│");
+            System.out.println("			│ 6. \u001B[36mEliminar Ingrediente de Una Receta \u001B[34m│");
+            System.out.println("			│ 7. \u001B[31mSalir                              \u001B[34m│");
+            System.out.println("\u001B[34m	└─────────────────────────────------------------------------┘");
             System.out.print("Ingrese su eleccion: ");
 
             int choice = scanner.nextInt();
@@ -497,7 +497,7 @@ public class Mercedario {
         newRecipe.setServes(scanner.nextInt());
         scanner.nextLine(); // Consumir la nueva línea
 
-        List<RecipeIngredient> ingredientList = new ArrayList();
+        List<RecipeIngredient> ingredientList = new ArrayList<RecipeIngredient>();
 
         System.out.println("\u001B[36mAgregue los nuevos ingredientes:\u001B[0m");
 
@@ -568,7 +568,7 @@ public class Mercedario {
     //Cuarto Menu opciones para Ingredinetes
     private static void printMenuIngredient(Scanner scanner, Facade facade, User user) {
         while (true) {
-            System.out.println("┌──────────────────────────────────── ┐");
+            System.out.println("┌────────────────────────────────────-┐");
             System.out.println("│  Mercedario Recetas Menu            │");
             System.out.println("├─────────────────────────────────────┤");
             System.out.println("│ Seleccione una opcion:              │");
