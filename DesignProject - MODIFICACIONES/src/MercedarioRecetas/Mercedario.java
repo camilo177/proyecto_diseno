@@ -69,15 +69,15 @@ public class Mercedario {
     //Meno Inicial
     private static void printMainMenuLogIn(boolean logIn) {
         System.out.println("┌───────────────────────────────────┐");
-        System.out.println("│   Mercedario Recetas Menu         │");
+        System.out.println("│   Mercedario Recetas Menú         │");
         System.out.println("├───────────────────────────────────┤");
-        System.out.println("│ Seleccione una opcion:            │");
+        System.out.println("│ Seleccione una opción:            │");
         System.out.println("├───────────────────────────────────┤");
-        System.out.println("│ 1. Iniciar Sesion                 │");
+        System.out.println("│ 1. Iniciar Sesión                 │");
         System.out.println("│ 2. Crear Usuario                  │");
         System.out.println("│ 3. Salir                          │");
         System.out.println("└───────────────────────────────────┘");
-        System.out.print("Ingrese su eleccion: ");
+        System.out.print("Ingrese su elección: ");
     }
 
     //Usuario por defecto
