@@ -56,15 +56,19 @@ public class Mercedario {
     //Logo del restaurante
     private static void printRestaurantBanner() {
 
-        System.out.println("  ████████╗██╗  ██╗███████╗    ██████╗ ██████╗ ██████╗ ██╗     ██████╗ ");
-        System.out.println("  ╚══██╔══╝██║  ██║██╔════╝   ██╔════╝██╔═══██╗██╔══██╗██║     ██╔══██╗");
+        System.out.println("  █████████╗██╗  ██╗███████╗    ██████╗ ██████╗ ██████╗ ██╗     ██████╗ ");
+        System.out.println("  ╚══██╔════╝██║  ██║██╔════╝   ██╔════╝██╔═══██╗██╔══██╗██║     ██╔══██╗");
         System.out.println("     ██║   ███████║███████╗   ██║     ██║   ██║██████╔╝██║     ██████╔╝");
         System.out.println("     ██║   ██╔══██║╚════██║   ██║     ██║   ██║██╔══██╗██║     ██╔══██╗");
         System.out.println("     ██║   ██║  ██║███████║   ╚██████╗╚██████╔╝██║  ██║███████╗██████╔╝");
         System.out.println("     ╚═╝   ╚═╝  ╚═╝╚══════╝    ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═════╝ \n");
-        System.out.println("   BIENVENIDO AL RESTAURANTE MERCEDARIO RECETAS!\n");
+
+        System.out.println("   ¡BIENVENIDO AL SABOR INIGUALABLE DE MERCEDARIO RECETAS!");
+        System.out.println("   Descubre la magia en cada bocado y la pasión en cada plato.\n");
+        System.out.println("   🍽️  ¡Preparamos delicias que despiertan tus sentidos!  🍷\n");
 
     }
+
 
     //Meno Inicial
     private static void printMainMenuLogIn(boolean logIn) {
@@ -102,7 +106,7 @@ public class Mercedario {
     //Metodo para iniciar sesion
     private static boolean loginUser(Scanner scanner, User user) {
         System.out.println("─────────────────────────");
-        System.out.println("Iniciar Sesion");
+        System.out.println("Iniciar Sesión");
         System.out.println("─────────────────────────");
 
         System.out.print("Ingresa tu nombre de usuario: ");
@@ -113,7 +117,7 @@ public class Mercedario {
         boolean authenticationResult = user.authenticate(USER_TYPE.Chef, password);
 
         if (authenticationResult) {
-            System.out.println("Ingreso exitoso. Bienvenido, " + userName + "!");
+            System.out.println("Ingreso exitoso. Bienvenido, " + userName);
         } else {
             System.out.println("Inicio de sesion fallido. Verifica tus credenciales.");
         }
@@ -124,7 +128,7 @@ public class Mercedario {
     //Metodo para crear un usuario nuevo
     private static void createUserIfNotLoggedIn(boolean iniciarSesion, Scanner scanner) {
         if (iniciarSesion) {
-            System.out.println("Debes cerrar sesion antes de crear un nuevo usuario.");
+            System.out.println("Debes cerrar sesión antes de crear un nuevo usuario.");
         } else {
             System.out.println("─────────────────────────────────");
             System.out.println("  Crear un Nuevo Usuario");
@@ -134,7 +138,7 @@ public class Mercedario {
             while (!userCreated) {
                 System.out.print("Ingresa un nuevo nombre de usuario: ");
                 String newUserName = scanner.nextLine();
-                System.out.print("Ingresa una nueva contrasena: ");
+                System.out.print("Ingresa una nueva contraseña: ");
                 // Presentar criterios de validación para la contraseña
                 System.out.println("\nLa contrasena debe cumplir con los siguientes criterios:");
                 System.out.println("- Al menos 8 caracteres.");
@@ -159,7 +163,7 @@ public class Mercedario {
                     case 3 ->
                         userType = USER_TYPE.Other;
                     default -> {
-                        System.out.println("Tipo de usuario no valido. Se asignara como 'Otro'.");
+                        System.out.println("Tipo de usuario no valido. Se asignará como 'Otro'.");
                         userType = USER_TYPE.Other;
                     }
                 }
@@ -176,15 +180,15 @@ public class Mercedario {
     private static void printSecondMenu(Scanner scanner, Facade facade, User user) {
         while (true) {
             System.out.println("┌──────────────────────────────────────-┐");
-            System.out.println("│  Mercedario Recetas Menu              │");
+            System.out.println("│  Mercedario Recetas Menú              │");
             System.out.println("├────────────────────────────────────-──┤");
-            System.out.println("│ Seleccione una opcion:                │");
+            System.out.println("│ Seleccione una opción:                │");
             System.out.println("├───────────────────────────────────────┤");
-            System.out.println("│ 1. Cerrar Sesion                      │");
+            System.out.println("│ 1. Cerrar Sesión                      │");
             System.out.println("│ 2. Recetas                            │");
             System.out.println("│ 3. Ingredientes                       │");
             System.out.println("└───────────────────────────────────────┘");
-            System.out.print("Ingrese su eleccion: ");
+            System.out.print("Ingrese su elección: ");
 
             int SecondMenuChoice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character
@@ -199,7 +203,7 @@ public class Mercedario {
                 case 3 ->
                     printMenuIngredient(scanner, facade, user);
                 default ->
-                    System.out.println("Opción no valida. Intentalo de nuevo.");
+                    System.out.println("Opción no válida. Intentalo de nuevo.");
             }
         }
     }
@@ -208,9 +212,9 @@ public class Mercedario {
     private static void printMenuRecipes(Scanner scanner, Facade facade, User user) {
         while (true) {
             System.out.println("\u001B[34m	┌─────────────────────────────------------------------------┐");
-            System.out.println("			│  Mercedario Recetas Menu                                  │");
+            System.out.println("			│  Mercedario Recetas Menú                                  │");
             System.out.println("			├────────────────────────────-------------------------------┤");
-            System.out.println("			│ Seleccione una opcion:      		                	    │");
+            System.out.println("			│ Seleccione una opción:      		                	    │");
             System.out.println("			├─────────────────────────────------------------------------┤");
             System.out.println("			│ 1. \u001B[36mVer Lista de Recetas               \u001B[34m│");
             System.out.println("			│ 2. \u001B[36mAgregar Nueva Receta               \u001B[34m│");
@@ -232,14 +236,14 @@ public class Mercedario {
                     if (user.getUserType() == USER_TYPE.Chef || user.getUserType() == USER_TYPE.Administrator) {
                         createRecipe(scanner, facade);
                     } else {
-                        System.out.println("No tienes permiso para agregar recetas.");
+                        System.out.println("No tiene permiso para agregar recetas.");
                     }
                 }
                 case 3 -> {
                     if (user.getUserType() == USER_TYPE.Chef || user.getUserType() == USER_TYPE.Administrator) {
                         deleteRecipe(scanner, facade);
                     } else {
-                        System.out.println("No tienes permiso para eliminar recetas.");
+                        System.out.println("No tiene permiso para eliminar recetas.");
                     }
                 }
                 case 4 ->
@@ -251,7 +255,7 @@ public class Mercedario {
                 case 7 ->
                     printSecondMenu(scanner, facade, user);
                 default ->
-                    System.out.println("Opcion no valida. Intentalo de nuevo.");
+                    System.out.println("Opción no válida. Intentalo de nuevo.");
             }
         }
     }
@@ -571,7 +575,7 @@ public class Mercedario {
             System.out.println("┌────────────────────────────────────-┐");
             System.out.println("│  Mercedario Recetas Menu            │");
             System.out.println("├─────────────────────────────────────┤");
-            System.out.println("│ Seleccione una opcion:              │");
+            System.out.println("│ Seleccione una opción:              │");
             System.out.println("├─────────────────────────────────────┤");
             System.out.println("│ 1. Ver Lista de Ingredientes        │");
             System.out.println("│ 2. Agregar Nuevo Ingrediente        │");
@@ -579,7 +583,7 @@ public class Mercedario {
             System.out.println("│ 4. Editar Ingrediente               │");
             System.out.println("│ 5. Salir                            │");
             System.out.println("└─────────────────────────────────────┘");
-            System.out.print("Ingrese su eleccion: ");
+            System.out.print("Ingrese su elección: ");
 
             int printMenuIngredientes = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character
@@ -613,7 +617,7 @@ public class Mercedario {
                     printSecondMenu(scanner, facade, user);
                 }
                 default -> {
-                    System.out.println("Opcion no valida. Intentalo de nuevo.");
+                    System.out.println("Opción no valida. Intentalo de nuevo.");
                 }
             }
         }
@@ -691,7 +695,7 @@ public class Mercedario {
         if (deleted) {
             System.out.println("Ingrediente '" + ingredientName + "' eliminado exitosamente.");
         } else {
-            System.out.println("No se encontro el ingrediente '" + ingredientName + "'.");
+            System.out.println("No se encontró el ingrediente '" + ingredientName + "'.");
         }
     }
 
